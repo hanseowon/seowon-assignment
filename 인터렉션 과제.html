@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>반복문!!!</title>
+    <style>
+        body { margin:0px; }
+        .box {
+            position:absolute;
+            width:20vw; height:20vh; 
+            line-height: 20vh;
+            text-align: center;
+            font-size: 9pt;
+          
+        }
+        .click-text{
+            position: fixed;
+            width:40px; height:20px; 
+            line-height: 20px;
+            font-size: 50px;
+            color: aqua;
+            left: 10px;
+            bottom:10Px;
+            z-index: 111;
+        }
+    </style>
+</head>
+<body>
+<script>
+let texts = "";
+let idx = 1;
+
+for (let x = 0; x<5; x++) {
+    for(let y = 0; y<4; y++){
+    let _left = x*20;
+    let _top = y*20;
+    let _inner = "No"+idx;
+    let r = parseInt( Math.random()*70+150);
+    let g = parseInt( Math.random()*70+150);
+    let b = parseInt( Math.random()*40+215);
+    texts += `<div class='box' 
+        style='left:${_left}vw;top:${_top}vh;
+        background-color:rgb(${r},${g},${b})
+        '>
+
+        ${_inner}
+        </div>`;
+    idx++;
+    
+}
+}
+texts+=`<a href="#" onClick="changeName()"class="click-text">click</a>`;
+document.write(texts);
+
+function changeName(){
+        let boxes = document.querySelectorAll(".box");
+        let i=1;
+        boxes.forEach((_box)=>{
+            _box.innerHTML="color"+i;
+            i++;
+        });
+    
+
+}
+function changeColor (mousex, mousey){
+    let rangex = Math.max(50, parseInt((mousex / window.innerWidth) * 255));
+    let rangey = Math.max(50, parseInt((mousey / window.innerHeight) * 255));
+    let boxes = document . querySelectorAll(".box");
+
+    boxes.forEach((_box)=>{
+       
+       let r = parseInt(Math.random()*rangex);
+       let g = parseInt(Math.random()*rangex);
+       let b = parseInt(Math.random()*100+100);
+       _box.style.backgroundColor = `rgb(${r},${g},${b})`;
+
+    });
+}
+document.addEventListener("mousemove",(e)=>{
+    changeColor(e.clientX, e.clientY);
+});
+
+
+</script>
+
+
+
+</body>
+</html>
+
